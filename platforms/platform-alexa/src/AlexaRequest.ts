@@ -30,6 +30,10 @@ export class AlexaRequest extends JovoRequest {
   session?: Session;
   request?: Request;
 
+  isOneShot(): boolean {
+    return this.getInputType() === InputType.Intent && !!this.session?.new;
+  }
+
   getLocale(): string | undefined {
     return this.request?.locale;
   }
