@@ -31,7 +31,7 @@ export class AlexaRequest extends JovoRequest {
   request?: Request;
 
   isOneShot(): boolean {
-    return this.getInputType() === InputType.Intent && !!this.session?.new;
+    return this.getInputType() === InputType.Intent && !!this.isNewSession();
   }
 
   getLocale(): string | undefined {
