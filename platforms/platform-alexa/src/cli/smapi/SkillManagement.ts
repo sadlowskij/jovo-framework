@@ -1,5 +1,10 @@
 import { JovoCliError, wait } from '@jovotech/cli-core';
-import { AskSkillList, SkillStatusError, SkillStatusResponse } from '../interfaces';
+import {
+  AskSkillList,
+  SkillStatusError,
+  SkillStatusResponse,
+  SkillValidationResponse,
+} from '../interfaces';
 import { execAskCommand } from '../utilities';
 import { PublicationMethodLike } from '../interfaces';
 
@@ -70,7 +75,7 @@ export async function submitSkillValidation(
   locales: string[],
   stage: string,
   askProfile?: string,
-): Promise<string | undefined> {
+): Promise<SkillValidationResponse> {
   const { stdout } = await execAskCommand(
     'smapiSubmitSkillValidation',
     [

@@ -123,3 +123,10 @@ export enum PublicationMethod {
 }
 
 export type PublicationMethodLike = EnumLike<PublicationMethod> | string;
+
+export type ValidationStatus = 'SUCCEEDED' | 'FAILED' | 'IN_PROGRESS';
+
+export interface SkillValidationResponse {
+  id: string;
+  status: ValidationStatus;
+}
