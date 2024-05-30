@@ -67,7 +67,7 @@ export async function submitSkillForCertification(
     askProfile,
   );
 
-  return JSON.parse(stdout!);
+  return stdout;
 }
 
 export async function submitSkillValidation(
