@@ -49,13 +49,7 @@ export class ValidateCommand extends PluginCommand {
             hint: 'Either add a skillId to the stage in the project configuration or add the --skill-id flag',
           });
 
-        const result = smapi.submitSkillValidation(
-          skillId,
-          locales,
-          flags['skill-stage'],
-          askProfile,
-        );
-        Log.info(result);
+        return smapi.submitSkillValidation(skillId, locales, flags['skill-stage'], askProfile);
       },
     );
     await validateTask.run();
