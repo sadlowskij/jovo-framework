@@ -1,6 +1,7 @@
 import { JovoCliError, wait } from '@jovotech/cli-core';
 import { AskSkillList, SkillStatusError, SkillStatusResponse } from '../interfaces';
 import { execAskCommand } from '../utilities';
+import { PublicationMethodLike } from '../interfaces';
 
 export async function listSkills(askProfile?: string): Promise<AskSkillList> {
   const { stdout } = await execAskCommand(
@@ -44,4 +45,42 @@ export async function getSkillStatus(skillId: string, askProfile?: string): Prom
       }
     }
   }
+}
+
+export async function submitSkillForCertification(
+  skillId: string,
+  publicationMethod: PublicationMethodLike,
+  askProfile?: string,
+): Promise<string | undefined> {
+  const { stdout } = await execAskCommand(
+    'smapiSubmitSkillForCertification',
+    [
+      'ask smapi submit-skill-for-certification',
+      `-s ${skillId}`,
+      `--publication-method ${publicationMethod}`,
+    ],
+    askProfile,
+  );
+
+  return JSON.parse(stdout!);
+}
+
+export async function submitSkillValidation(
+  skillId: string,
+  locales: string[],
+  stage: string,
+  askProfile?: string,
+): Promise<string | undefined> {
+  const { stdout } = await execAskCommand(
+    'smapiSubmitSkillValidation',
+    [
+      'ask smapi submit-skill-validation',
+      `-s ${skillId}`,
+      `--stage ${stage}`,
+      `--locales ${locales.join(' ')}`,
+    ],
+    askProfile,
+  );
+
+  return JSON.parse(stdout!);
 }
